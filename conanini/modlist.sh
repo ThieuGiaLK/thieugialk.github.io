@@ -9,7 +9,7 @@ steamcmd_path="/home/container/steamcmd"
 appid="440900"
 
 # Danh sách các mod ID (phân tách bằng dấu phẩy)
-modlist="880454836,1396310739"
+modlist=" "
 
 # File chứa danh sách mod
 listfile="/home/container/ConanSandbox/Mods/modlist.txt"
@@ -38,5 +38,5 @@ done
 # Đóng script sau khi hoàn thành
 ## install end
 echo "---------------------------------------------------------"
-echo "Installation MOD completed... Chờ 10 phút Server đang lên"
+echo "Installation MOD completed... Chờ 10 Đến 15 phút Server đang lên"
 exit 0
