@@ -9,32 +9,41 @@ steamcmd_path="/home/container/steamcmd"
 appid="440900"
 
 # Danh sách các mod ID (phân tách bằng dấu phẩy)
-modlist=" "
+modlist="864199675,880454836"
 
 # File chứa danh sách mod
 listfile="/home/container/ConanSandbox/Mods/modlist.txt"
 
-# Tùy chọn: Tạo thư mục chứa file .pak
-mod_folder="/home/container/ConanSandbox/Mods"
+# Kiểm tra nếu modlist trống
+if [ -z "$modlist" ]; then
+    # Xóa file modlist.txt nếu tồn tại
+    if [ -f "$listfile" ]; then
+        rm "$listfile"
+    fi
+    echo "Modlist is empty. File modlist.txt has been deleted."
+    echo "---------------------------------------------------------"
+	echo "Installation MOD completed... Chờ 10 Đến 15 phút Server đang lên"
+    exit 0
+fi
 
 # Tải và sao chép mods
 for mod in $(echo $modlist | tr "," "\n")
 do
     # Tải mod từ Steam Workshop
     $steamcmd_path/steamcmd.sh +login anonymous +workshop_download_item $appid $mod +quit
-        
-    # Kiểm tra sự tồn tại của mod trước khi sao chép
-    if [ -d "/home/container/Steam/steamapps/workshop/content/$appid/$mod" ]; then
-        cp "/home/container/Steam/steamapps/workshop/content/$appid/$mod/"*pak "$mod_folder/"
-    fi
 done
 
 # Xây dựng file modlist.txt
 > $listfile
-for modname in $(ls "$mod_folder"/*pak)
+for mod in $(echo $modlist | tr "," "\n")
 do
-    echo "*$(basename "$modname")" >> $listfile
+    mod_path="/home/container/Steam/steamapps/workshop/content/$appid/$mod"
+    for modname in $(ls "$mod_path"/*.pak 2>/dev/null)
+    do
+        echo "$mod_path/$(basename "$modname")" >> $listfile
+    done
 done
+
 # Đóng script sau khi hoàn thành
 ## install end
 echo "---------------------------------------------------------"
