@@ -9,7 +9,7 @@ steamcmd_path="/home/container/steamcmd"
 appid="440900"
 
 # Danh sách các mod ID (phân tách bằng dấu phẩy)
-modlist="880454836"
+modlist=""
 
 # File chứa danh sách mod
 listfile="/home/container/ConanSandbox/Mods/modlist.txt"
@@ -48,20 +48,3 @@ done
 ## install end
 echo "---------------------------------------------------------"
 echo "Installation MOD completed"
-
-# Thực thi lệnh XVFB và Wine để khởi chạy server trong nền
-xvfb-run --auto-servernum wine /home/container/ConanSandbox/Binaries/Win64/ConanSandboxServer-Win64-Shipping.exe -Port=${SERVER_PORT} -RconPort=${RCON_PORT} -ServerName="${SRV_NAME}" -console -log &
-
-# Đợi vài giây để server khởi động
-sleep 60
-
-# Kết nối vào log của server để xem quá trình
-log_file="/home/container/ConanSandbox/Saved/Logs/ConanSandbox.log"
-if [ -f "$log_file" ]; then
-    echo "Server log found. Attaching to log..."
-    tail -f "$log_file"
-else
-    echo "Log file not found. Please check the server status manually."
-fi
-
-exit 0
