@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính toán kinh nghiệm theo cấp độ</title>
+</head>
+<body>
+<h1>Tính toán kinh nghiệm theo cấp độ</h1>
+
+<!-- Form nhập liệu -->
+<label for="playerLevel">Lever Player:</label>
+<input type="number" id="playerLevel" placeholder="Nhập Lever Player" min="1">
+<br><br>
+
+<label for="dinoLevel">Lever Dino:</label>
+<input type="number" id="dinoLevel" placeholder="Nhập Lever Dino" min="1">
+<br><br>
+
+<button onclick="calculateXP()">Tính toán kinh nghiệm</button>
+
+<h2>Kết quả:</h2>
+<div id="outputResult"></div>
+
+<script>
+    // Hàm tính toán kinh nghiệm
+    function calculateXP() {
+        // Lấy giá trị Lever Player và Lever Dino từ form nhập liệu
+        const playerLevel = parseInt(document.getElementById('playerLevel').value);
+        const dinoLevel = parseInt(document.getElementById('dinoLevel').value);
+
+        // Kiểm tra giá trị nhập vào có hợp lệ không
+        if (isNaN(playerLevel) || isNaN(dinoLevel) || playerLevel <= 0 || dinoLevel <= 0) {
+            document.getElementById('outputResult').innerText = "Vui lòng nhập cấp độ hợp lệ!";
+            return;
+        }
+
+        // Công thức tính kinh nghiệm theo cấp độ (giả sử)
+        const baseXP = 1000; // Kinh nghiệm cơ bản
+        const xpMultiplier = 1.2; // Hệ số nhân theo cấp độ
+
+        // Tính kinh nghiệm dựa trên cấp độ
+        const playerXP = baseXP * Math.pow(xpMultiplier, playerLevel - 1);
+        const dinoXP = baseXP * Math.pow(xpMultiplier, dinoLevel - 1);
+
+        // Xuất kết quả
+        document.getElementById('outputResult').innerHTML = `
+            <p>Kinh nghiệm cần thiết cho Lever Player ${playerLevel}: ${playerXP.toFixed(2)}</p>
+            <p>Kinh nghiệm cần thiết cho Lever Dino ${dinoLevel}: ${dinoXP.toFixed(2)}</p>
+        `;
+    }
+</script>
+</body>
+</html>

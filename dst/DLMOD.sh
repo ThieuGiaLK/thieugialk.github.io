@@ -46,8 +46,6 @@ if [ $? -eq 0 ]; then
     # Thiết lập các thông số chung cho server
     run_shared=(./dontstarve_dedicated_server_nullrenderer_x64)
     run_shared+=(-console)
-    run_shared+=(-monitor_parent_process $$)
-    run_shared+=(-bind_ip 0.0.0.0)
 
     # Khởi động shard Caves
     "${run_shared[@]}" -port "$cave_port" -persistent_storage_root /home/container/DoNotStarveTogether -cluster server -conf_dir config -shard Caves | sed 's/^/Caves:  /' &
