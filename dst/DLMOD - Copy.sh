@@ -6,14 +6,6 @@ modoverrides_file="/home/container/DoNotStarveTogether/config/server/Master/modo
 # Đường dẫn đến file dedicated_server_mods_setup.lua
 dedicated_server_mods_setup_file="/home/container/mods/dedicated_server_mods_setup.lua"
 
-# Đường dẫn đến file cluster_token.txt
-cluster_token_file="/home/container/DoNotStarveTogether/config/server/cluster_token.txt"
-sv_token=$SERVER_TOKEN
-# Ghi cluster token vào file
-echo "Cập nhật cluster token..."
-echo "$SERVER_TOKEN" > "$cluster_token_file"
-echo "Đã cập nhật cluster token thành công"
-
 # Đọc file modoverrides.lua để lấy danh sách các ID mod
 modlist=$(grep -oP '(?<=workshop-)[0-9]+' $modoverrides_file)
 
@@ -28,8 +20,9 @@ done
 echo "Đã ghi các ModID vào file dedicated_server_mods_setup.lua"
 echo "Hoàn tất tải các mod."
 
+
 # Tính toán port cho Master và Caves
-server_port=11016
+server_port= 11016
 cave_port=$((server_port + 2))
 
 # Kiểm tra quá trình tải có thành công không
