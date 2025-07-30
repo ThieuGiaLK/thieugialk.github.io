@@ -1,0 +1,13 @@
+
+certbot certonly --nginx -d quanly.maychugametg.com
+
+sudo apt install -y certbot
+export SRV=5
+sudo certbot -d srv$SRV.maychugametg.com --manual --preferred-challenges dns certonly
+
+echo '0 23 * * * certbot renew --quiet --deploy-hook "systemctl restart wings"' | sudo crontab -
+
+
+sudo certbot renew --deploy-hook "systemctl restart wings"
+
+sudo systemctl restart wings
