@@ -57,7 +57,7 @@ if [ $? -eq 0 ]; then
 
     # Khởi động shard Caves (ép chạy trên core 2)
     echo "Khởi động shard Caves trên core 2..."
-    taskset -c 2 "${run_shared[@]}" \
+    taskset -c 1 "${run_shared[@]}" \
         -port "$cave_port" \
         -persistent_storage_root /home/container/DoNotStarveTogether \
         -cluster server -conf_dir config -shard Caves \
@@ -65,7 +65,7 @@ if [ $? -eq 0 ]; then
 
     # Khởi động shard Master (ép chạy trên core 3)
     echo "Khởi động shard Master trên core 3..."
-    taskset -c 3 "${run_shared[@]}" \
+    taskset -c 2 "${run_shared[@]}" \
         -port "$server_port" \
         -persistent_storage_root /home/container/DoNotStarveTogether \
         -cluster server -conf_dir config -shard Master \
