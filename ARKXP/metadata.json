@@ -1,5 +1,0 @@
-{
-  "name": "ARK XP Config Generator",
-  "description": "A tool to generate ARK: Survival Evolved LevelExperienceRampOverrides configuration code based on custom level inputs and CSV data.",
-  "requestFramePermissions": []
-}
