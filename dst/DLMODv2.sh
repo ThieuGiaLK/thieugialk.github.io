@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Coppy steamclient.so
+for dir in /home/container /home/container/linux64 /home/container/bin64/lib64 /home/container/bin/lib32; do
+  mkdir -p "$dir"
+  cp /home/container/steamcmd/linux64/steamclient.so "$dir/"
+done
+
 # Đường dẫn đến file modoverrides.lua
 modoverrides_file="/home/container/DoNotStarveTogether/config/server/Master/modoverrides.lua"
 
